@@ -187,6 +187,11 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
     apController = new ScrollController(initialScrollOffset: (currentSelectedAPIndex - 1) * _getItemHeight() );
 
     super.initState();
+
+    if(widget.onTimeChange != null) {
+      WidgetsBinding.instance
+          .addPostFrameCallback((_) => widget.onTimeChange(getDateTime()));
+    }
   }
 
   @override
@@ -305,7 +310,9 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
             }
             setState(() {
               onScrollEnd();
-              widget.onTimeChange(getDateTime());
+              if(widget.onTimeChange != null) {
+                widget.onTimeChange(getDateTime());
+              }
             });
           }
         }
@@ -369,7 +376,9 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
         if(scrollNotification is UserScrollNotification){
           if(scrollNotification.direction.toString() == "ScrollDirection.idle") {
             isAPScrolling = false;
-            widget.onTimeChange(getDateTime());
+            if(widget.onTimeChange != null) {
+              widget.onTimeChange(getDateTime());
+            }
           }
         }
         else if (scrollNotification is ScrollUpdateNotification){
