@@ -11,7 +11,7 @@ class ItemScrollPhysics extends ScrollPhysics {
   const ItemScrollPhysics({
     ScrollPhysics parent,
     this.itemHeight,
-    this.targetPixelsLimit = 3.0
+    this.targetPixelsLimit = 3.0,
   }) : assert(itemHeight != null && itemHeight > 0),
         super(parent: parent);
 
@@ -44,7 +44,7 @@ class ItemScrollPhysics extends ScrollPhysics {
     if ((velocity <= 0.0 && position.pixels <= position.minScrollExtent) ||
         (velocity >= 0.0 && position.pixels >= position.maxScrollExtent))
       return super.createBallisticSimulation(position, velocity);
-    final Tolerance tolerance = this.tolerance;
+    Tolerance tolerance = this.tolerance;
     final double target = _getTargetPixels(position, tolerance, velocity);
     if (target != position.pixels)
       return ScrollSpringSimulation(spring, position.pixels, target, velocity, tolerance: tolerance);
@@ -327,7 +327,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
           if(!widget.is24HourMode && controller == hourController && text == '0'){
             text = '12';
           }
-          if(widget.isForce2Digits){
+          if(widget.isForce2Digits && text != ''){
             text = text.padLeft(2, '0');
           }
           return new Container(
@@ -397,6 +397,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
         itemCount: 4,
         physics: ItemScrollPhysics(
           itemHeight: _getItemHeight(),
+          targetPixelsLimit: 1,
         ),
       ),
     );

@@ -132,6 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
       spacing: 50,
       itemHeight: 80,
       isForce2Digits: true,
+      minutesInterval: 15,
       onTimeChange: (time) {
         setState(() {
           _dateTime = time;
