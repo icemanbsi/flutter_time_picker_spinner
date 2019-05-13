@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## [1.0.4] - 2019/05/13
 
-* TODO: Describe initial release.
+- Bug fixing on snap scroll

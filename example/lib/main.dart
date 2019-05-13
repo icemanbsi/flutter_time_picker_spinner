@@ -62,9 +62,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: new Column(
           children: <Widget>[
 //            hourMinute12H(),
-//            hourMinute15Interval(),
+            hourMinute15Interval(),
 //            hourMinuteSecond(),
-            hourMinute12HCustomStyle(),
+//            hourMinute12HCustomStyle(),
             new Container(
               margin: EdgeInsets.symmetric(
                   vertical: 50

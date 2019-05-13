@@ -1,6 +1,7 @@
 library time_picker_spinner;
 
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class ItemScrollPhysics extends ScrollPhysics {
   /// Creates physics for snapping to item.
@@ -21,7 +22,8 @@ class ItemScrollPhysics extends ScrollPhysics {
   }
 
   double _getItem(ScrollPosition position) {
-    return position.pixels / itemHeight;
+    double maxScrollItem = (position.maxScrollExtent / itemHeight).floorToDouble();
+    return min(max(0, position.pixels / itemHeight), maxScrollItem);
   }
 
   double _getPixels(ScrollPosition position, double item) {
@@ -41,9 +43,9 @@ class ItemScrollPhysics extends ScrollPhysics {
   Simulation createBallisticSimulation(ScrollMetrics position, double velocity) {
     // If we're out of range and not headed back in range, defer to the parent
     // ballistics, which should put us back in range at a item boundary.
-    if ((velocity <= 0.0 && position.pixels <= position.minScrollExtent) ||
-        (velocity >= 0.0 && position.pixels >= position.maxScrollExtent))
-      return super.createBallisticSimulation(position, velocity);
+//    if ((velocity <= 0.0 && position.pixels <= position.minScrollExtent) ||
+//        (velocity >= 0.0 && position.pixels >= position.maxScrollExtent))
+//      return super.createBallisticSimulation(position, velocity);
     Tolerance tolerance = this.tolerance;
     final double target = _getTargetPixels(position, tolerance, velocity);
     if (target != position.pixels)
@@ -96,7 +98,7 @@ class TimePickerSpinner extends StatefulWidget {
 }
 
 class _TimePickerSpinnerState extends State<TimePickerSpinner> {
-  ScrollController hourController;
+  ScrollController hourController = new ScrollController();
   ScrollController minuteController = new ScrollController();
   ScrollController secondController = new ScrollController();
   ScrollController apController = new ScrollController();
