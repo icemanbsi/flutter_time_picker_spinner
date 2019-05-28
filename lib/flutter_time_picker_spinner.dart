@@ -179,10 +179,10 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
     currentSelectedHourIndex = (currentTime.hour % (widget.is24HourMode ? 24 : 12)) + _getHourCount();
     hourController = new ScrollController(initialScrollOffset: (currentSelectedHourIndex - 1) * _getItemHeight() );
 
-    currentSelectedMinuteIndex = (currentTime.minute / widget.minutesInterval).floor() + _getMinuteCount();
+    currentSelectedMinuteIndex = (currentTime.minute / widget.minutesInterval).floor() + (isLoop(_getMinuteCount()) ? _getMinuteCount() : 1);
     minuteController = new ScrollController(initialScrollOffset: (currentSelectedMinuteIndex - 1) * _getItemHeight() );
 
-    currentSelectedSecondIndex = (currentTime.second / widget.secondsInterval).floor() + _getSecondCount();
+    currentSelectedSecondIndex = (currentTime.second / widget.secondsInterval).floor() + (isLoop(_getSecondCount()) ? _getSecondCount() : 1);
     secondController = new ScrollController(initialScrollOffset: (currentSelectedSecondIndex - 1) * _getItemHeight() );
 
     currentSelectedAPIndex = currentTime.hour >= 12 ? 2 : 1;
