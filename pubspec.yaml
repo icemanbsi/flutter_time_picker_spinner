@@ -1,6 +1,6 @@
 name: flutter_time_picker_spinner
 description: Time Picker with spinner instead of a default material time picker. This widget works with 12 or 24 hour format and custom interval mode.
-version: 1.0.6
+version: 1.0.6+1
 author: Bobby Stenly<iceman.bsi@gmail.com>
 homepage: https://github.com/icemanbsi/flutter_time_picker_spinner
 
