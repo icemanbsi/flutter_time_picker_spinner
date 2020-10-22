@@ -31,7 +31,6 @@ samples, guidance on mobile development, and a full API reference.
 | secondsInterval         | int             | 1                                                                                                                 |
 | is24HourMode            | bool            | true                                                                                                              |
 | isShowSeconds           | bool            | false                                                                                                             |
-| isShowSeconds           | bool            | false                                                                                                             |
 | highlightedTextStyle    | TextStyle       | false                                                                                                             |
 | normalTextStyle         | TextStyle       | false                                                                                                             |
 | itemHeight              | double          | 60.0                                                                                                              |
