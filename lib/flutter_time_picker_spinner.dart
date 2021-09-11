@@ -437,6 +437,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
           itemHeight: _getItemHeight(),
           targetPixelsLimit: 1,
         ),
+        padding: EdgeInsets.zero,
       ),
     );
 
