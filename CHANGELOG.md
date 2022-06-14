@@ -1,3 +1,7 @@
+## [2.0.1+1] - 2022/06/14
+- updated package and example to Flutter 3
+- adjusted structure to standard of flutter packages
+- added flutter_lints
 ## [1.0.6+1] - 2020/05/12
 - bug fixed because of ListView default padding
 

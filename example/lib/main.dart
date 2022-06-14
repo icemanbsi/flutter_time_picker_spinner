@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -22,13 +25,13 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Time Picker Spinner Demo'),
+      home: const MyHomePage(title: 'Flutter Time Picker Spinner Demo'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -42,53 +45,42 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   DateTime _dateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: new Container(
-        padding: EdgeInsets.only(
-            top: 100
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-        child: new Column(
-          children: <Widget>[
+        body: Container(
+          padding: const EdgeInsets.only(top: 100),
+          child: Column(
+            children: <Widget>[
 //            hourMinute12H(),
-            hourMinute15Interval(),
+              hourMinute15Interval(),
 //            hourMinuteSecond(),
 //            hourMinute12HCustomStyle(),
-            new Container(
-              margin: EdgeInsets.symmetric(
-                  vertical: 50
-              ),
-              child: new Text(
-                _dateTime.hour.toString().padLeft(2, '0') + ':' +
-                    _dateTime.minute.toString().padLeft(2, '0') + ':' +
-                    _dateTime.second.toString().padLeft(2, '0'),
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 50),
+                child: Text(
+                  '${_dateTime.hour.toString().padLeft(2, '0')}:${_dateTime.minute.toString().padLeft(2, '0')}:${_dateTime.second.toString().padLeft(2, '0')}',
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ),
-            ),
-          ],
-        ),
-      )
-    );
+            ],
+          ),
+        ));
   }
 
-
   /// SAMPLE
-  Widget hourMinute12H(){
-    return new TimePickerSpinner(
+  Widget hourMinute12H() {
+    return TimePickerSpinner(
       is24HourMode: false,
       onTimeChange: (time) {
         setState(() {
@@ -97,8 +89,9 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
-  Widget hourMinuteSecond(){
-    return new TimePickerSpinner(
+
+  Widget hourMinuteSecond() {
+    return TimePickerSpinner(
       isShowSeconds: true,
       onTimeChange: (time) {
         setState(() {
@@ -107,8 +100,9 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
-  Widget hourMinute15Interval(){
-    return new TimePickerSpinner(
+
+  Widget hourMinute15Interval() {
+    return TimePickerSpinner(
       spacing: 40,
       minutesInterval: 15,
       onTimeChange: (time) {
@@ -118,17 +112,12 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
-  Widget hourMinute12HCustomStyle(){
-    return new TimePickerSpinner(
+
+  Widget hourMinute12HCustomStyle() {
+    return TimePickerSpinner(
       is24HourMode: false,
-      normalTextStyle: TextStyle(
-        fontSize: 24,
-        color: Colors.deepOrange
-      ),
-      highlightedTextStyle: TextStyle(
-        fontSize: 24,
-        color: Colors.yellow
-      ),
+      normalTextStyle: const TextStyle(fontSize: 24, color: Colors.deepOrange),
+      highlightedTextStyle: const TextStyle(fontSize: 24, color: Colors.yellow),
       spacing: 50,
       itemHeight: 80,
       isForce2Digits: true,
