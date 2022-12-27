@@ -332,7 +332,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
                 onUpdateSelectedIndex(selectedIndex + max);
                 controller
                     .jumpTo(controller.offset + (max * _getItemHeight()!));
-              } else if (segment == 2) {
+              } else if (segment == widget.numberOfVisibleNums -1) {
                 onUpdateSelectedIndex(selectedIndex - max);
                 controller
                     .jumpTo(controller.offset - (max * _getItemHeight()!));
@@ -348,7 +348,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
         } else if (scrollNotification is ScrollUpdateNotification) {
           setState(() {
             onUpdateSelectedIndex(
-                (controller.offset / _getItemHeight()!).round() + 1);
+                (controller.offset / _getItemHeight()!).round() + offset);
           });
         }
         return true;
@@ -435,7 +435,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
           );
         },
         controller: apController,
-        itemCount: 4,
+        itemCount: widget.numberOfVisibleNums +1,
         physics: ItemScrollPhysics(
           itemHeight: _getItemHeight(),
           targetPixelsLimit: 1,
