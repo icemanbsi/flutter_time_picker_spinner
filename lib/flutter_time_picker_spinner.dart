@@ -421,7 +421,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
       },
       child: ListView.builder(
         itemBuilder: (context, index) {
-          String text = index == 1 ? (widget.apNames![index] ?? 'AM') : (index == 2 ? (widget.apNames![index] ?? 'PM') : '');
+          String text = index == 1 ? (widget.apNames![index-1] ?? 'AM') : (index == 2 ? (widget.apNames![index-1] ?? 'PM') : '');
           return Container(
             height: _getItemHeight(),
             alignment: Alignment.center,
