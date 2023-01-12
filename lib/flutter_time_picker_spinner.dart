@@ -79,6 +79,7 @@ class TimePickerSpinner extends StatefulWidget {
   final double? spacing;
   final bool isForce2Digits;
   final TimePickerCallback? onTimeChange;
+  final Locale? locale;
 
   TimePickerSpinner(
       {Key? key,
@@ -94,6 +95,7 @@ class TimePickerSpinner extends StatefulWidget {
       this.alignment,
       this.spacing,
       this.isForce2Digits = false,
+        this.locale = const Locale('en',''),
       this.onTimeChange})
       : super(key: key);
 
@@ -293,8 +295,10 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment:  MainAxisAlignment.center,
       children: contents,
+      textDirection: widget.locale!.languageCode =="ar"? TextDirection.rtl:TextDirection.ltr,
+
     );
   }
 
@@ -370,7 +374,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
             height: _getItemHeight(),
             alignment: _getAlignment(),
             child: Text(
-              text,
+              checkLocalOfNumber(text),
               style: selectedIndex == index
                   ? _getHighlightedTextStyle()
                   : _getNormalTextStyle(),
@@ -397,6 +401,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
     );
   }
 
+
   Widget apSpinner() {
     Widget _spinner = NotificationListener<ScrollNotification>(
       onNotification: (scrollNotification) {
@@ -419,7 +424,14 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
       },
       child: ListView.builder(
         itemBuilder: (context, index) {
-          String text = index == 1 ? 'AM' : (index == 2 ? 'PM' : '');
+          late String text;
+          if(widget.locale!.languageCode=="ar"){
+             text = index == 1 ? 'ص' : (index == 2 ? 'م' : '');
+
+          }else{
+             text = index == 1 ? 'AM' : (index == 2 ? 'PM' : '');
+
+          }
           return Container(
             height: _getItemHeight(),
             alignment: Alignment.center,
@@ -447,4 +459,22 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
       ],
     );
   }
+
+
+  /// to check number language
+  String checkLocalOfNumber(String input) {
+    const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const farsi = ['۰', '۱', '۲', '۳', '٤', '٥', '٦', '۷', '۸', '۹'];
+
+    if(widget.locale!.languageCode == "ar") {
+      for (int i = 0; i < english.length; i++) {
+        input = input.replaceAll(english[i], farsi[i]);
+      }
+    }
+
+    return input;
+  }
 }
+
+
+
