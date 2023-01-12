@@ -297,7 +297,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment:  MainAxisAlignment.center,
       children: contents,
-      textDirection: widget.locale!.languageCode =="ar"? TextDirection.ltr:TextDirection.rtl,
+      textDirection: widget.locale!.languageCode =="ar"? TextDirection.rtl:TextDirection.ltr,
 
     );
   }
