@@ -1,3 +1,5 @@
+// Modeified by SehunKIM 2023.01.08
+
 library time_picker_spinner;
 
 import 'package:flutter/material.dart';
@@ -78,6 +80,8 @@ class TimePickerSpinner extends StatefulWidget {
   final AlignmentGeometry? alignment;
   final double? spacing;
   final bool isForce2Digits;
+  final List? apNames;
+  final String apPosition;
   final TimePickerCallback? onTimeChange;
 
   TimePickerSpinner(
@@ -94,6 +98,8 @@ class TimePickerSpinner extends StatefulWidget {
       this.alignment,
       this.spacing,
       this.isForce2Digits = false,
+      this.apNames,
+      this.apPosition = 'right',
       this.onTimeChange})
       : super(key: key);
 
@@ -218,8 +224,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
     super.initState();
 
     if (widget.onTimeChange != null) {
-      WidgetsBinding.instance!
-          .addPostFrameCallback((_) => widget.onTimeChange!(getDateTime()));
+      WidgetsBinding.instance.addPostFrameCallback((_) => widget.onTimeChange!(getDateTime()));
     }
   }
 
@@ -283,12 +288,22 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
     }
 
     if (!widget.is24HourMode) {
-      contents.add(spacer());
-      contents.add(SizedBox(
-        width: _getItemWidth()! * 1.2,
-        height: _getItemHeight()! * 3,
-        child: apSpinner(),
-      ));
+      if(widget.apPosition=='right'){
+        contents.add(spacer());
+        contents.add(SizedBox(
+          width: _getItemWidth()! * 1.2,
+          height: _getItemHeight()! * 3,
+          child: apSpinner(),
+        ));
+      }
+      else if(widget.apPosition=='left'){
+        contents.insert(0, spacer());
+        contents.insert(0, SizedBox(
+          width: _getItemWidth()! * 1.2,
+          height: _getItemHeight()! * 3,
+          child: apSpinner(),
+        ));
+      }
     }
 
     return Row(
@@ -419,7 +434,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
       },
       child: ListView.builder(
         itemBuilder: (context, index) {
-          String text = index == 1 ? 'AM' : (index == 2 ? 'PM' : '');
+          String text = index == 1 ? (widget.apNames![index-1] ?? 'AM') : (index == 2 ? (widget.apNames![index-1] ?? 'PM') : '');
           return Container(
             height: _getItemHeight(),
             alignment: Alignment.center,
