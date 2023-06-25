@@ -363,14 +363,14 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
               text == '0') {
             text = '12';
           }
-          if (widget.isForce2Digits && text != '') {
-            text = text.padLeft(2, '0');
-          }
+          // if (widget.isForce2Digits && text != '') {
+          //   text = text.padLeft(2, '0');
+          // }
           return Container(
             height: _getItemHeight(),
             alignment: _getAlignment(),
             child: Text(
-              text,
+              text.padLeft(2, '0'),
               style: selectedIndex == index
                   ? _getHighlightedTextStyle()
                   : _getNormalTextStyle(),
