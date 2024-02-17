@@ -422,7 +422,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
           String text = index == 1 ? 'AM' : (index == 2 ? 'PM' : '');
           return Container(
             height: _getItemHeight(),
-            alignment: Alignment.center,
+            alignment: _getAlignment(),
             child: Text(
               text,
               style: currentSelectedAPIndex == index
